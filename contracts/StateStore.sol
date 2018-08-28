@@ -53,7 +53,7 @@ contract StateStore
         usersLog.push(msg.sender);
     }
 
-    function getUserByAddr(address _addr) external view returns(string, uint){
+    function getUserByAddr(address _addr) external view returns(string, string){
 
         return (userList[_addr].name, userList[_addr].email);
     }
