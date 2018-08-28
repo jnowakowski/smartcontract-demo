@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-contract StateStore
+contract IOTLamp
 {  
 
     struct User
@@ -34,7 +34,7 @@ contract StateStore
         if(!isAllowed(msg.sender)) accessList.push(msg.sender);
     }
 
-    function readUser(address _addr) external view returns(string _name, uint _state){
+    function readUser(address _addr) external view returns(string _name, string _state){
         User memory user = userList[_addr];
 
         return (user.name, user.email); 
