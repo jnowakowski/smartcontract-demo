@@ -6,13 +6,13 @@ contract StateStore
     struct User
     {
         string name;
-        uint state;
+        string email;
     }
 
     bool active;
     address[] usersLog;
     address[] accessList;
-    mapping(address => User) userStates;
+    mapping(address => User) userList;
     
     modifier onlyBy()
     {
@@ -27,17 +27,17 @@ contract StateStore
         active = false;
     }
 
-    function saveUserState(string _name, uint _state) external{
+    function addUser(string _name, string _email) external{
         bytes memory name = bytes(_name);
         require(name.length > 0, "name cannot be empty.");
-        userStates[msg.sender] = User(_name, _state);
+        userList[msg.sender] = User(_name, _email);
         if(!isAllowed(msg.sender)) accessList.push(msg.sender);
     }
 
-    function readUserState(address _addr) external view returns(string _name, uint _state){
-        User memory user = userStates[_addr];
+    function readUser(address _addr) external view returns(string _name, uint _state){
+        User memory user = userList[_addr];
 
-        return (user.name, user.state); 
+        return (user.name, user.email); 
     }
 
     function readUsersLog() external view returns (address[] _addr){
@@ -51,6 +51,11 @@ contract StateStore
     function setActive(bool _flag) onlyBy() external{
         active = _flag;
         usersLog.push(msg.sender);
+    }
+
+    function getUserByAddr(address _addr) external view returns(string, uint){
+
+        return (userList[_addr].name, userList[_addr].email);
     }
 
     function isAllowed(address _addr)view internal returns(bool){
