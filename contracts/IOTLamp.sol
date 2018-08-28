@@ -53,11 +53,6 @@ contract IOTLamp
         usersLog.push(msg.sender);
     }
 
-    function getUserByAddr(address _addr) external view returns(string, string){
-
-        return (userList[_addr].name, userList[_addr].email);
-    }
-
     function isAllowed(address _addr)view internal returns(bool){
         for (uint index = 0; index < accessList.length; index++) {
             if (accessList[index] == _addr) return true;
