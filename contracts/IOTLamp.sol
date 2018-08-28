@@ -44,6 +44,9 @@ contract IOTLamp
         return usersLog;
     }
 
+    function getAccessList() external view returns(address[] _addr){
+        return accessList;
+    }
     function isActive() external view returns(bool){
         return active;
     }
