@@ -20,8 +20,6 @@ contract StateStore
     function saveUserState(string _name, uint _state) external{
         bytes memory name = bytes(_name);
         require(name.length > 0, "name cannot be empty.");
-
-        usersLog.push(msg.sender);
         userStates[msg.sender] = User(_name, _state);
     }
 
@@ -41,5 +39,6 @@ contract StateStore
 
     function setActive(bool _flag) external{
         active = _flag;
+        usersLog.push(msg.sender);
     }
  }
