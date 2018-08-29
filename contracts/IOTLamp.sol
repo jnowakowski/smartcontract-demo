@@ -62,4 +62,4 @@ contract IOTLamp
         }
         return false;
     }
- }
+}
